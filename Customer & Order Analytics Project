@@ -41,3 +41,35 @@ on Feb.orderID = cust.order_id
 Where Feb.Quantity > 2
 And orderid <> 'Order ID'
 AND length(orderid) = 6;
+
+--% Wildcard
+Select Product, price
+From BIT_DB.FebSales
+Where price like '5%';
+
+Select Product, price
+From BIT_DB.FebSales
+Where price like '%.99';
+
+Select Product, price
+From BIT_DB.FebSales
+Where price like '%Batteries%';
+
+--Using % and LIKE with Dates
+Select location 
+From BIT_DB.FebSales
+Where orderdate = '02/18/19 01:35';
+
+Select sum(quantity)
+From BIT_DB.FebSales
+Where orderdate like '02/18/19;
+
+--BETWEEN Dates
+Select orderdate
+From BIT_DB.FebSales
+where orderdate between '02/13/19 00:00' and '02/18/19 00:00';
+
+--_ Wildcard
+Select orderID
+From BIT_DB.MarSales
+Where orderId Like '16_0%';
