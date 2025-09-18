@@ -1,3 +1,5 @@
+--In this SQL, I'm querying a database with multiple tables in it to quantify statistics about customer and order data. 
+
 --How many of those orders were for an iPhone?
 SELECT COUNT(distinct orderid)
 FROM BIT_DB.JanSales
@@ -8,7 +10,7 @@ AND Product Like "%iPhone%";
 --Select the customer account numbers for all the orders that were placed in February.
 Select distinct acctnum
 From BIT_DB.customers
-inner Join FebSales
+inner join FebSales
 on customers.order_id = FebSales.orderID
 Where length(orderid)=6
 and orderid<> 'Order ID'
