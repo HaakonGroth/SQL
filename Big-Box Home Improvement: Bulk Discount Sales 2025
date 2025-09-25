@@ -1,0 +1,46 @@
+-- I used a data set found on kaggle and made up and answered some questions from the data set 
+-- data set found website https://www.kaggle.com/datasets/pratyushpuri/big-box-home-improvement-bulk-discount-sales-2025?resource=download
+
+--How many Lowes stores are there
+Select retailer, count(retailer) as count
+From BIT_DB.HomeImprovemntData
+Group by retailer
+order by count desc;
+
+--what are the top 3 retailers that sells the most paint?
+Select retailer, SUM(quantity) as totalPaintSold
+From BIT_DB.HomeImprovemntData
+where department = 'Paint'
+group by retailer
+order by totalPaintSold desc
+limit 3;
+
+-- what are the paint brands sold by each retailer?
+
+Select retailer, brand, department
+From BIT_DB.HomeImprovemntData
+Where department like '%aint%'
+group by retailer, brand
+;
+
+--What is the average unit price across retailers?
+
+Select retailer, Round(AVG(unit_price), 2) as averagePrice
+From BIT_DB.HomeImprovemntData
+Group by retailer
+order by averagePrice desc;
+
+--Do bulk discounts lead to larger order quantities?
+Select "bulk_discount_applied_%" AS discountPercent,
+    AVG(quantity) as avgQuant,
+    count(*) as num_orders
+From BIT_DB.HomeImprovemntData
+Group by "bulk_discount_applied_%"
+order by discountPercent desc;
+
+--What’s the busiest time of year for home improvement projects?
+Select strftime('%m', purchase_date) as month,
+    count(*) as numProj
+From BIT_DB.HomeImprovemntData
+Group By month
+order by numProj desc;
